@@ -19,6 +19,9 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          
       - name: Create and Push Git Tag
         id: release_tag
         run: |
@@ -28,9 +31,8 @@ jobs:
       - name: Create release with auto-generated notes
         id: create_release
         uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: ${{ github.event.inputs.tag }}
           release_name: ${{ github.event.inputs.title }}
           generate_release_notes: true
+          token: ${{ secrets.GITHUB_TOKEN }}
