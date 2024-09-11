@@ -25,6 +25,8 @@ jobs:
       - name: Create and Push Git Tag
         id: release_tag
         run: |
+          git config user.email "github-actions@github.com"
+          git config user.name "Github Actions"
           git tag ${{ github.event.inputs.tag }} -m "Release ${{ github.event.inputs.tag }}"
           git push origin ${{ github.event.inputs.tag }}
 
